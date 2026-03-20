@@ -1,0 +1,23 @@
+name: ospf-frr-lab
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      binds:
+        - configs/r1/daemons:/etc/frr/daemons
+    r2:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      binds:
+        - configs/r2/daemons:/etc/frr/daemons
+    r3:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      binds:
+        - configs/r3/daemons:/etc/frr/daemons
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
+    - endpoints: ["r2:eth2", "r3:eth1"]
